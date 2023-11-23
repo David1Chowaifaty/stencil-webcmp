@@ -19,7 +19,7 @@
   --input: 214.3, 31.8%, 91.4%;
   --ring: 221.2, 83.2%, 53.3%;
   --radius: 0.5rem;
-  --dc-ring-offset-width: 4px;
+  --cm-ring-offset-width: 1px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,7 +74,6 @@
   }
 }
 body {
-  all: unset;
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   font-family: 'Roboto', sans-serif;
@@ -104,27 +103,27 @@ button {
   margin: 0;
 }
 .ring-0 {
-  box-shadow: 0 0 0 calc(0px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(0px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 
 .ring-1 {
-  box-shadow: 0 0 0 calc(1px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(1px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 
 .ring-2 {
-  box-shadow: 0 0 0 calc(2px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(2px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 
 .ring-3 {
-  box-shadow: 0 0 0 calc(3px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(3px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 
 .ring-4 {
-  box-shadow: 0 0 0 calc(4px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(4px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 
 .ring-8 {
-  box-shadow: 0 0 0 calc(8px + var(--dc-ring-offset-width)) var(--ring);
+  box-shadow: 0 0 0 calc(8px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
 .container {
   width: 100%;

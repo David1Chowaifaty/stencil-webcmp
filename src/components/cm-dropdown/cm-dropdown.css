@@ -1,0 +1,136 @@
+:host {
+  display: block;
+  max-width: var(--max-width, 300px);
+  position: relative;
+}
+
+ul,
+li,
+div {
+  all: unset;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid hsl(var(--border));
+  position: relative;
+  z-index: 2000;
+  width: 100%;
+  height: 40px;
+}
+
+.combobox-trigger {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.combobox-trigger:focus,
+.combobox-trigger:active {
+  box-shadow: 0 0 1px 1px hsl(var(--ring));
+}
+
+.combobox-item {
+  font-size: 13px;
+  line-height: 1;
+  color: hsl(var(--foreground));
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.combobox-item[data-highlighted='true'] {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.combobox-item[data-disabled='true'] {
+  color: hsl(var(--border));
+}
+
+label {
+  all: unset;
+}
+
+input {
+  flex: 1;
+  overflow: hidden;
+  background: hsl(var(--background));
+  border: 0;
+  color: hsl(var(--foreground));
+}
+
+input:focus {
+  outline: none;
+}
+
+.combobox-content {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 100000;
+  background-color: hsl(var(--background));
+  border-radius: var(--radius);
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 10px 38px -10px rgba(22, 23, 24, 0.35), 0 10px 20px -15px rgba(22, 23, 24, 0.2);
+}
+
+.combobox-viewport {
+  padding: 0 5px;
+}
+
+.combobox-content[data-visibility='show'],
+.combobox-content[data-visibility='hide'] {
+  animation-duration: 100ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.combobox-content[data-visibility='show'] {
+  animation-name: fadeIn;
+}
+
+.combobox-content[data-visibility='hide'] {
+  animation-name: fadeOut;
+}
+
+.combobox-content[data-position='above'] {
+  bottom: 50px;
+  left: 0;
+}
+
+.combobox-content[data-position='below'] {
+  top: 50px;
+  left: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

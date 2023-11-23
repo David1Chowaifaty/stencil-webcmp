@@ -17,8 +17,10 @@ export namespace Components {
     }
     interface CmCard {
     }
-    interface CmCombobox {
+    interface CmDropdown {
         "itemNames": string[];
+        "rtl": boolean;
+        "search": boolean;
     }
     interface CmToast {
         "hideToast": () => Promise<void>;
@@ -31,9 +33,9 @@ export interface CmButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCmButtonElement;
 }
-export interface CmComboboxCustomEvent<T> extends CustomEvent<T> {
+export interface CmDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLCmComboboxElement;
+    target: HTMLCmDropdownElement;
 }
 export interface CmToastCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -63,22 +65,22 @@ declare global {
         prototype: HTMLCmCardElement;
         new (): HTMLCmCardElement;
     };
-    interface HTMLCmComboboxElementEventMap {
+    interface HTMLCmDropdownElementEventMap {
         "itemClick": string;
     }
-    interface HTMLCmComboboxElement extends Components.CmCombobox, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLCmComboboxElementEventMap>(type: K, listener: (this: HTMLCmComboboxElement, ev: CmComboboxCustomEvent<HTMLCmComboboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+    interface HTMLCmDropdownElement extends Components.CmDropdown, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCmDropdownElementEventMap>(type: K, listener: (this: HTMLCmDropdownElement, ev: CmDropdownCustomEvent<HTMLCmDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLCmComboboxElementEventMap>(type: K, listener: (this: HTMLCmComboboxElement, ev: CmComboboxCustomEvent<HTMLCmComboboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCmDropdownElementEventMap>(type: K, listener: (this: HTMLCmDropdownElement, ev: CmDropdownCustomEvent<HTMLCmDropdownElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
         removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
-    var HTMLCmComboboxElement: {
-        prototype: HTMLCmComboboxElement;
-        new (): HTMLCmComboboxElement;
+    var HTMLCmDropdownElement: {
+        prototype: HTMLCmDropdownElement;
+        new (): HTMLCmDropdownElement;
     };
     interface HTMLCmToastElementEventMap {
         "toast": IToast;
@@ -100,7 +102,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "cm-button": HTMLCmButtonElement;
         "cm-card": HTMLCmCardElement;
-        "cm-combobox": HTMLCmComboboxElement;
+        "cm-dropdown": HTMLCmDropdownElement;
         "cm-toast": HTMLCmToastElement;
     }
 }
@@ -115,9 +117,11 @@ declare namespace LocalJSX {
     }
     interface CmCard {
     }
-    interface CmCombobox {
+    interface CmDropdown {
         "itemNames"?: string[];
-        "onItemClick"?: (event: CmComboboxCustomEvent<string>) => void;
+        "onItemClick"?: (event: CmDropdownCustomEvent<string>) => void;
+        "rtl"?: boolean;
+        "search"?: boolean;
     }
     interface CmToast {
         "onToast"?: (event: CmToastCustomEvent<IToast>) => void;
@@ -127,7 +131,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "cm-button": CmButton;
         "cm-card": CmCard;
-        "cm-combobox": CmCombobox;
+        "cm-dropdown": CmDropdown;
         "cm-toast": CmToast;
     }
 }
@@ -137,7 +141,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "cm-button": LocalJSX.CmButton & JSXBase.HTMLAttributes<HTMLCmButtonElement>;
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
-            "cm-combobox": LocalJSX.CmCombobox & JSXBase.HTMLAttributes<HTMLCmComboboxElement>;
+            "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;
         }
     }
