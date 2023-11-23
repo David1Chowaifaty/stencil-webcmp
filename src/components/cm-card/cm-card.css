@@ -1,0 +1,7 @@
+:host {
+  background-color: hsl(var(--background));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  padding: 25px;
+  display: grid;
+}

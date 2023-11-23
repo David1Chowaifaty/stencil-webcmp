@@ -6,6 +6,11 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [
+        {
+          src: './theme.css',
+        },
+      ],
     },
     {
       type: 'dist-custom-elements',
@@ -15,10 +20,15 @@ export const config: Config = {
     },
     {
       type: 'www',
-      serviceWorker: null, // disable service workers
+      serviceWorker: null,
+      copy: [
+        {
+          src: './theme.css',
+        },
+      ],
     },
   ],
   testing: {
-    browserHeadless: "new",
+    browserHeadless: 'new',
   },
 };

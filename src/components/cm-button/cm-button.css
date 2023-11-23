@@ -1,0 +1,41 @@
+button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: var(--radius);
+  transition: all 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+.default {
+  background: hsla(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+.link {
+  color: hsl(var(--primary));
+}
+.secondary {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+.danger {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+.default:hover {
+  background: hsla(var(--primary), 0.8);
+}
+
+.secondary:hover {
+  background: hsla(var(--secondary), 0.8);
+}
+.danger:hover {
+  background-color: hsla(var(--destructive), 0.8);
+}
+.link:hover {
+  text-decoration: underline;
+}
