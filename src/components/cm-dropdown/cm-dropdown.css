@@ -6,7 +6,8 @@
 
 ul,
 li,
-div {
+div,
+button {
   all: unset;
 }
 
@@ -20,17 +21,21 @@ div {
   position: relative;
   z-index: 2000;
   width: 100%;
-  height: 40px;
+  height: 30px;
 }
 
 .combobox-trigger {
   width: 100%;
   border-radius: var(--radius);
   border: 1px solid hsl(var(--border));
-  padding: 10px;
-  display: flex;
+  padding: 0 15px;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 13px;
+  line-height: 1;
+  height: 35px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .combobox-trigger:focus,
@@ -56,12 +61,8 @@ div {
   background-color: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
 }
-.combobox-item[data-disabled='true'] {
-  color: hsl(var(--border));
-}
-
-label {
-  all: unset;
+.combobox-item[data-disabled] {
+  color: hsla(var(--foreground), 0.6);
 }
 
 input {

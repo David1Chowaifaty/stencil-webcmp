@@ -18,9 +18,12 @@ export namespace Components {
     interface CmCard {
     }
     interface CmDropdown {
-        "itemNames": string[];
+        "dropdownTitle": string;
+        "itemNames": IItems[];
         "rtl": boolean;
         "search": boolean;
+    }
+    interface CmSpinner {
     }
     interface CmToast {
         "hideToast": () => Promise<void>;
@@ -82,6 +85,12 @@ declare global {
         prototype: HTMLCmDropdownElement;
         new (): HTMLCmDropdownElement;
     };
+    interface HTMLCmSpinnerElement extends Components.CmSpinner, HTMLStencilElement {
+    }
+    var HTMLCmSpinnerElement: {
+        prototype: HTMLCmSpinnerElement;
+        new (): HTMLCmSpinnerElement;
+    };
     interface HTMLCmToastElementEventMap {
         "toast": IToast;
     }
@@ -103,6 +112,7 @@ declare global {
         "cm-button": HTMLCmButtonElement;
         "cm-card": HTMLCmCardElement;
         "cm-dropdown": HTMLCmDropdownElement;
+        "cm-spinner": HTMLCmSpinnerElement;
         "cm-toast": HTMLCmToastElement;
     }
 }
@@ -118,10 +128,13 @@ declare namespace LocalJSX {
     interface CmCard {
     }
     interface CmDropdown {
-        "itemNames"?: string[];
+        "dropdownTitle"?: string;
+        "itemNames"?: IItems[];
         "onItemClick"?: (event: CmDropdownCustomEvent<string>) => void;
         "rtl"?: boolean;
         "search"?: boolean;
+    }
+    interface CmSpinner {
     }
     interface CmToast {
         "onToast"?: (event: CmToastCustomEvent<IToast>) => void;
@@ -132,6 +145,7 @@ declare namespace LocalJSX {
         "cm-button": CmButton;
         "cm-card": CmCard;
         "cm-dropdown": CmDropdown;
+        "cm-spinner": CmSpinner;
         "cm-toast": CmToast;
     }
 }
@@ -142,6 +156,7 @@ declare module "@stencil/core" {
             "cm-button": LocalJSX.CmButton & JSXBase.HTMLAttributes<HTMLCmButtonElement>;
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
+            "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;
         }
     }
