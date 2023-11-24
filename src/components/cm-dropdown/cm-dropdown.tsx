@@ -81,6 +81,7 @@ export class CmDropdown {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (this.filteredItemNames.length > 0) {
+        this.buttonRef.blur();
         this.focusOnList();
       }
     }
