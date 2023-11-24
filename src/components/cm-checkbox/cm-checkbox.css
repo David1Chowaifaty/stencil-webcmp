@@ -28,7 +28,6 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
 }
 .CheckboxRoot[data-state='checked'] {
@@ -36,10 +35,10 @@ input {
   background: hsl(var(--primary));
 }
 .CheckboxRoot[data-state='checked']:hover {
-  background: hsl(var(--primary));
+  background: hsla(var(--primary), 0.8);
 }
 .CheckboxRoot[data-state='unchecked']:hover {
-  background-color: hsla(var(--input), 0.2);
+  background-color: hsla(var(--input), 0.1);
 }
 .CheckboxRoot:focus-visible {
   outline: 2px solid hsl(var(--ring));
@@ -60,7 +59,7 @@ input {
   animation: fadeOut 200ms forwards;
 }
 .Label {
-  color: white;
+  color: var(--foreground);
   padding-left: 15px;
   font-size: 15px;
   line-height: 1;

@@ -247,6 +247,7 @@ export class CmDropdown {
                   </svg>
 
                   <input
+                    autoFocus={true}
                     onBlur={() => this.updateListFocus()}
                     ref={el => (this.inputRef = el)}
                     id="drp-search"

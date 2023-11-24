@@ -44,6 +44,9 @@ input {
 .SwitchRoot[data-state='checked'] {
   background-color: hsl(var(--primary));
 }
+.SwitchRoot[data-state='checked']:hover {
+  background-color: hsla(var(--primary), 0.8);
+}
 
 .SwitchThumb {
   position: absolute;
