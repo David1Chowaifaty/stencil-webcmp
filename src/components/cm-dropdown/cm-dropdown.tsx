@@ -68,7 +68,7 @@ export class CmDropdown {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
       const filterdNames = this.itemNames.filter(item => item.item.toLowerCase().includes(this.searchQuery.toLowerCase()));
-      this.filteredItemNames = filterdNames.length > 0 ? filterdNames : [{ item: 'No Result Found', disabled: true }];
+      this.filteredItemNames = filterdNames.length > 0 ? filterdNames : [];
     }, 100);
     if (this.searchQuery === '') {
       this.filteredItemNames = [...this.itemNames];
@@ -81,8 +81,8 @@ export class CmDropdown {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (this.filteredItemNames.length > 0) {
-        this.buttonRef.blur();
         this.focusOnList();
+        this.currentHighlightedIndex = 0;
       }
     }
   }
@@ -105,6 +105,7 @@ export class CmDropdown {
         if (this.filteredItemNames[newIndex].disabled) {
           newIndex = (newIndex + 1) % itemCount;
         }
+        console.log(newIndex);
         break;
       case 'ArrowUp':
         newIndex = (newIndex - 1 + itemCount) % itemCount;
@@ -267,9 +268,15 @@ export class CmDropdown {
                   />
                 </div>
               )}
-              <ul class={'combobox-viewport'} tabindex="0" onKeyDown={event => this.onKeyDown(event)} onMouseLeave={() => this.onMouseLeave()}>
-                {this.filteredItemNames.map((name, index) => this.renderItem(name, index))}
-              </ul>
+              {this.filteredItemNames.length > 0 ? (
+                <ul class={'combobox-viewport'} tabindex="0" onKeyDown={event => this.onKeyDown(event)} onMouseLeave={() => this.onMouseLeave()}>
+                  {this.filteredItemNames.map((name, index) => this.renderItem(name, index))}
+                </ul>
+              ) : (
+                <p data-disabled={true} class="combobox-item">
+                  No result found
+                </p>
+              )}
             </Fragment>
           )}
         </div>
