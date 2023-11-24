@@ -72,10 +72,12 @@ body.dark-theme {
     opacity: 0;
   }
 }
+
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 p,
 h1,
