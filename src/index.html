@@ -32,6 +32,19 @@
       margin-bottom: 30px;
     }
 
+    .flex {
+      display: flex;
+      gap: 20px
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
     .flex-1 {
       height: 90vh;
     }
@@ -39,16 +52,16 @@
 </head>
 
 <body>
-  <h1>Switch</h1>
+  <cm-button id="theme-button" class="my-30">Toggle theme</cm-button>
   <cm-switch></cm-switch>
+  <cm-checkbox class="my-30"></cm-checkbox>
   <cm-dropdown class="my-30"></cm-dropdown>
-  <cm-button class="my-30" id="theme-button">Toggle theme</cm-button>
-  <cm-button is-loading class="my-30">Default</cm-button>
-  <cm-button variants="danger" class="my-30">Danger</cm-button>
-  <cm-button variants="secondary" class="my-30">Secondary</cm-button>
-  <cm-button variants="link" class="my-30">Link</cm-button>
-  <cm-spinner></cm-spinner>
-  <div class="flex-1"></div>
+  <div class="container flex items-center">
+    <cm-button>Default</cm-button>
+    <cm-button variants="danger">Danger</cm-button>
+    <cm-button variants="secondary">Secondary</cm-button>
+    <cm-button variants="link">Link</cm-button>
+  </div>
   <script>
     function toggleTheme() {
       const isDarkTheme = document.body.classList.contains('dark-theme');

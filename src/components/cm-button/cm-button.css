@@ -1,5 +1,6 @@
 :host {
   display: block;
+  --ring-color: hsl(var(--ring));
 }
 button {
   all: unset;
@@ -13,18 +14,26 @@ button {
   font-size: 14px;
   font-weight: 500;
   gap: 10px;
+  position: relative;
+  box-sizing: border-box;
 }
-
+button:focus-visible {
+  outline: 1px solid var(--ring-color);
+  outline-offset: 2px;
+}
 .default {
   background: hsla(var(--primary));
   color: hsl(var(--primary-foreground));
+  --ring-color: hsl(var(--primary));
   --spinner-background: hsl(var(--primary-foreground));
 }
 .link {
   color: hsl(var(--primary));
+  --ring-color: hsl(var(--primary));
 }
 .secondary {
   background: hsl(var(--secondary));
+  --ring-color: hsl(var(--secondary));
   color: hsl(var(--secondary-foreground));
   --spinner-background: hsl(var(--secondary-foreground));
 }
@@ -32,6 +41,7 @@ button {
   background: hsl(var(--destructive));
   color: hsl(var(--destructive-foreground));
   --spinner-background: hsl(var(--destructive-foreground));
+  --ring-color: hsl(var(--destructive));
 }
 
 .default:hover {

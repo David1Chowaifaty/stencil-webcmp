@@ -27,7 +27,7 @@ export class CmDropdown {
   @State() currentHighlightedIndex: number = -1;
   @State() filteredItemNames: IItems[] = this.itemNames;
   @Element() el: HTMLElement;
-  @Event() itemClick: EventEmitter<string>;
+  @Event({ bubbles: true, composed: true }) itemClick: EventEmitter<string>;
   private searchTimeout: any;
   private buttonRef: HTMLButtonElement;
   private dropdownContainer: HTMLDivElement;

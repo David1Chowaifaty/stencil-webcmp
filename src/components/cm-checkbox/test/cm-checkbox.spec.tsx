@@ -1,18 +1,18 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { CmSwitch } from '../cm-switch';
+import { CmCheckbox } from '../cm-checkbox';
 
-describe('cm-switch', () => {
+describe('cm-checkbox', () => {
   it('renders', async () => {
     const page = await newSpecPage({
-      components: [CmSwitch],
-      html: `<cm-switch></cm-switch>`,
+      components: [CmCheckbox],
+      html: `<cm-checkbox></cm-checkbox>`,
     });
     expect(page.root).toEqualHtml(`
-      <cm-switch>
+      <cm-checkbox>
         <mock:shadow-root>
           <slot></slot>
         </mock:shadow-root>
-      </cm-switch>
+      </cm-checkbox>
     `);
   });
 });

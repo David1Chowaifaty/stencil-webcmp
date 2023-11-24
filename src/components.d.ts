@@ -18,6 +18,15 @@ export namespace Components {
     }
     interface CmCard {
     }
+    interface CmCheckbox {
+        "checked": boolean;
+        "defaultChecked": boolean;
+        "disabled": boolean;
+        "labelMessage": string;
+        "name": string;
+        "required": boolean;
+        "value": string;
+    }
     interface CmDropdown {
         "dropdownTitle": string;
         "itemNames": IItems[];
@@ -44,6 +53,10 @@ export namespace Components {
 export interface CmButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCmButtonElement;
+}
+export interface CmCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCmCheckboxElement;
 }
 export interface CmDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -80,6 +93,23 @@ declare global {
     var HTMLCmCardElement: {
         prototype: HTMLCmCardElement;
         new (): HTMLCmCardElement;
+    };
+    interface HTMLCmCheckboxElementEventMap {
+        "checkedChange": boolean;
+    }
+    interface HTMLCmCheckboxElement extends Components.CmCheckbox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCmCheckboxElementEventMap>(type: K, listener: (this: HTMLCmCheckboxElement, ev: CmCheckboxCustomEvent<HTMLCmCheckboxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCmCheckboxElementEventMap>(type: K, listener: (this: HTMLCmCheckboxElement, ev: CmCheckboxCustomEvent<HTMLCmCheckboxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCmCheckboxElement: {
+        prototype: HTMLCmCheckboxElement;
+        new (): HTMLCmCheckboxElement;
     };
     interface HTMLCmDropdownElementEventMap {
         "itemClick": string;
@@ -141,6 +171,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "cm-button": HTMLCmButtonElement;
         "cm-card": HTMLCmCardElement;
+        "cm-checkbox": HTMLCmCheckboxElement;
         "cm-dropdown": HTMLCmDropdownElement;
         "cm-spinner": HTMLCmSpinnerElement;
         "cm-switch": HTMLCmSwitchElement;
@@ -158,6 +189,16 @@ declare namespace LocalJSX {
         "variants"?: 'default' | 'danger' | 'secondary' | 'icon' | 'ghost' | 'link';
     }
     interface CmCard {
+    }
+    interface CmCheckbox {
+        "checked"?: boolean;
+        "defaultChecked"?: boolean;
+        "disabled"?: boolean;
+        "labelMessage"?: string;
+        "name"?: string;
+        "onCheckedChange"?: (event: CmCheckboxCustomEvent<boolean>) => void;
+        "required"?: boolean;
+        "value"?: string;
     }
     interface CmDropdown {
         "dropdownTitle"?: string;
@@ -185,6 +226,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "cm-button": CmButton;
         "cm-card": CmCard;
+        "cm-checkbox": CmCheckbox;
         "cm-dropdown": CmDropdown;
         "cm-spinner": CmSpinner;
         "cm-switch": CmSwitch;
@@ -197,6 +239,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "cm-button": LocalJSX.CmButton & JSXBase.HTMLAttributes<HTMLCmButtonElement>;
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
+            "cm-checkbox": LocalJSX.CmCheckbox & JSXBase.HTMLAttributes<HTMLCmCheckboxElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
             "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
             "cm-switch": LocalJSX.CmSwitch & JSXBase.HTMLAttributes<HTMLCmSwitchElement>;

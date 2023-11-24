@@ -19,14 +19,13 @@ input {
   position: relative;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  tap-highlight-color: rgba(0, 0, 0, 0);
   border: 2px solid transparent;
   flex-shrink: 0;
 }
 .SwitchRoot:focus-within::after {
   content: '';
-  height: calc(var(--switch-root-height) + 10px);
-  width: calc(var(--switch-root-width) + 10px);
+  height: calc(var(--switch-root-height) + 6px);
+  width: calc(var(--switch-root-width) + 6px);
   border-radius: 9999px;
   position: absolute;
   z-index: -1;
