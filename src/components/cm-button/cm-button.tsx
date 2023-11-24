@@ -11,7 +11,7 @@ export class CmButton {
   @Prop({ reflect: true }) variants: 'default' | 'danger' | 'secondary' | 'icon' | 'ghost' | 'link' = 'default';
   @Prop({ reflect: true }) name: string;
   @Prop({ reflect: true }) value: string;
-  @Prop({ reflect: true }) isLoading: boolean = true;
+  @Prop({ reflect: true }) isLoading: boolean = false;
   @Event() buttonClicked: EventEmitter<MouseEvent>;
 
   render() {
