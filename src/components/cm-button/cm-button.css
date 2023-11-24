@@ -9,10 +9,13 @@ button {
   justify-content: center;
   font-size: 14px;
   font-weight: 500;
+  gap: 10px;
 }
+
 .default {
   background: hsla(var(--primary));
   color: hsl(var(--primary-foreground));
+  --spinner-background: hsl(var(--primary-foreground));
 }
 .link {
   color: hsl(var(--primary));
@@ -20,10 +23,12 @@ button {
 .secondary {
   background: hsl(var(--secondary));
   color: hsl(var(--secondary-foreground));
+  --spinner-background: hsl(var(--secondary-foreground));
 }
 .danger {
   background: hsl(var(--destructive));
   color: hsl(var(--destructive-foreground));
+  --spinner-background: hsl(var(--destructive-foreground));
 }
 
 .default:hover {
@@ -38,4 +43,9 @@ button {
 }
 .link:hover {
   text-decoration: underline;
+}
+
+.spinner {
+  height: 24px;
+  width: 24px;
 }

@@ -10,6 +10,7 @@ export { IToast, TPositions } from "./components/cm-toast/toast";
 export namespace Components {
     interface CmButton {
         "disabled": boolean;
+        "isLoading": boolean;
         "name": string;
         "type": 'button' | 'submit' | 'reset';
         "value": string;
@@ -23,9 +24,8 @@ export namespace Components {
         "rtl": boolean;
         "search": boolean;
     }
-<<<<<<< HEAD
     interface CmSpinner {
-=======
+    }
     interface CmSwitch {
         "checked": boolean;
         "defaultChecked": boolean;
@@ -33,7 +33,6 @@ export namespace Components {
         "name": string;
         "required": boolean;
         "value": string;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
     }
     interface CmToast {
         "hideToast": () => Promise<void>;
@@ -99,13 +98,12 @@ declare global {
         prototype: HTMLCmDropdownElement;
         new (): HTMLCmDropdownElement;
     };
-<<<<<<< HEAD
     interface HTMLCmSpinnerElement extends Components.CmSpinner, HTMLStencilElement {
     }
     var HTMLCmSpinnerElement: {
         prototype: HTMLCmSpinnerElement;
         new (): HTMLCmSpinnerElement;
-=======
+    };
     interface HTMLCmSwitchElementEventMap {
         "checkedChange": boolean;
     }
@@ -122,7 +120,6 @@ declare global {
     var HTMLCmSwitchElement: {
         prototype: HTMLCmSwitchElement;
         new (): HTMLCmSwitchElement;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
     };
     interface HTMLCmToastElementEventMap {
         "toast": IToast;
@@ -145,17 +142,15 @@ declare global {
         "cm-button": HTMLCmButtonElement;
         "cm-card": HTMLCmCardElement;
         "cm-dropdown": HTMLCmDropdownElement;
-<<<<<<< HEAD
         "cm-spinner": HTMLCmSpinnerElement;
-=======
         "cm-switch": HTMLCmSwitchElement;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
         "cm-toast": HTMLCmToastElement;
     }
 }
 declare namespace LocalJSX {
     interface CmButton {
         "disabled"?: boolean;
+        "isLoading"?: boolean;
         "name"?: string;
         "onButtonClicked"?: (event: CmButtonCustomEvent<MouseEvent>) => void;
         "type"?: 'button' | 'submit' | 'reset';
@@ -171,9 +166,8 @@ declare namespace LocalJSX {
         "rtl"?: boolean;
         "search"?: boolean;
     }
-<<<<<<< HEAD
     interface CmSpinner {
-=======
+    }
     interface CmSwitch {
         "checked"?: boolean;
         "defaultChecked"?: boolean;
@@ -182,7 +176,6 @@ declare namespace LocalJSX {
         "onCheckedChange"?: (event: CmSwitchCustomEvent<boolean>) => void;
         "required"?: boolean;
         "value"?: string;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
     }
     interface CmToast {
         "onToast"?: (event: CmToastCustomEvent<IToast>) => void;
@@ -193,11 +186,8 @@ declare namespace LocalJSX {
         "cm-button": CmButton;
         "cm-card": CmCard;
         "cm-dropdown": CmDropdown;
-<<<<<<< HEAD
         "cm-spinner": CmSpinner;
-=======
         "cm-switch": CmSwitch;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
         "cm-toast": CmToast;
     }
 }
@@ -208,11 +198,8 @@ declare module "@stencil/core" {
             "cm-button": LocalJSX.CmButton & JSXBase.HTMLAttributes<HTMLCmButtonElement>;
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
-<<<<<<< HEAD
             "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
-=======
             "cm-switch": LocalJSX.CmSwitch & JSXBase.HTMLAttributes<HTMLCmSwitchElement>;
->>>>>>> 1df6c4129ef1d858aa08cd1961d07acc32b327a0
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;
         }
     }

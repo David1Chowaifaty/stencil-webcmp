@@ -23,11 +23,18 @@ export class CmSwitch {
     this.checkedChange.emit(this.checked);
   }
 
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.toggleChecked();
+      event.preventDefault();
+    }
+  }
   render() {
     return (
       <Host>
         <label data-disabled={this.disabled} data-state={this.checked ? 'checked' : 'unchecked'} class="SwitchRoot">
           <input
+            placeholder="switch"
             type="checkbox"
             value={this.value}
             disabled={this.disabled}
@@ -35,8 +42,9 @@ export class CmSwitch {
             required={this.required}
             checked={this.checked}
             onInput={() => this.toggleChecked()}
+            onKeyDown={e => this.handleKeyDown(e)}
           />
-          <span  class="SwitchThumb"></span>
+          <span class="SwitchThumb"></span>
         </label>
       </Host>
     );
