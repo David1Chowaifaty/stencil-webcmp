@@ -19,7 +19,7 @@ input {
   height: 0;
 }
 .CheckboxRoot {
-  background-color: hsl(var(--input));
+  border: 2px solid hsl(var(--border));
   width: 25px;
   height: 25px;
   border-radius: var(--radius);
@@ -27,15 +27,17 @@ input {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 .CheckboxRoot[data-state='checked'] {
+  border-width: 0;
   background: hsl(var(--primary));
 }
 .CheckboxRoot[data-state='checked']:hover {
   background: hsl(var(--primary));
 }
 .CheckboxRoot[data-state='unchecked']:hover {
-  background-color: hsla(var(--input), 0.8);
+  background-color: hsla(var(--input), 0.2);
 }
 .CheckboxRoot:focus-visible {
   outline: 2px solid hsl(var(--ring));
