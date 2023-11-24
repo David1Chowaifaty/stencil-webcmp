@@ -81,20 +81,14 @@ export class CmDropdown {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
       if (this.filteredItemNames.length > 0) {
-        this.focusOnList();
+        setTimeout(() => {
+          this.updateListFocus();
+        }, 20);
         this.currentHighlightedIndex = 0;
       }
     }
   }
 
-  focusOnList() {
-    setTimeout(() => {
-      const list = this.el.querySelector('.combobox-viewport') as HTMLUListElement;
-      if (list) {
-        list.focus();
-      }
-    }, 0);
-  }
   handleNavigation(event: KeyboardEvent) {
     const itemCount = this.filteredItemNames.length;
     let newIndex = this.currentHighlightedIndex;
@@ -105,7 +99,6 @@ export class CmDropdown {
         if (this.filteredItemNames[newIndex].disabled) {
           newIndex = (newIndex + 1) % itemCount;
         }
-        console.log(newIndex);
         break;
       case 'ArrowUp':
         newIndex = (newIndex - 1 + itemCount) % itemCount;
@@ -135,24 +128,20 @@ export class CmDropdown {
     this.currentHighlightedIndex = -1;
   }
   toggleDropdown() {
-    this.calculateDropdownPosition();
-    this.buttonRef.blur();
-    this.isDropdownVisible = !this.isDropdownVisible;
-
-    if (this.isDropdownVisible) {
+    if (!this.isDropdownVisible) {
+      this.isDropdownVisible = true;
+      this.calculateDropdownPosition();
+      this.buttonRef.blur();
+      setTimeout(() => {
+        this.updateListFocus();
+      }, 50);
+    } else {
+      this.isDropdownVisible = false;
       this.addFocusToButton();
       if (this.searchQuery !== '') {
         this.searchQuery = '';
         this.filteredItemNames = [...this.itemNames];
       }
-      setTimeout(() => {
-        const list = this.el.querySelector('.combobox-viewport') as HTMLUListElement;
-        if (list) {
-          list.focus();
-        }
-      }, 0);
-    } else {
-      this.addFocusToButton();
     }
   }
 
@@ -218,8 +207,8 @@ export class CmDropdown {
   }
   handleButtonKeyDown(event: KeyboardEvent) {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      this.toggleDropdown();
       event.preventDefault();
+      this.toggleDropdown();
     }
   }
   render() {
