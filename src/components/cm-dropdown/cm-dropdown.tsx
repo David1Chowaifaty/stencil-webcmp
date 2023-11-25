@@ -192,9 +192,7 @@ export class CmDropdown {
   }
 
   renderButtonName() {
-    if (this.filteredItemNames[this.currentHighlightedIndex] !== undefined) {
-      return this.filteredItemNames[this.currentHighlightedIndex].item;
-    } else if (this.selectedItemName !== '') {
+    if (this.selectedItemName !== '') {
       return this.selectedItemName;
     }
     return this.dropdownTitle;

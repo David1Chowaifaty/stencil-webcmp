@@ -17,7 +17,6 @@ input {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-
 }
 input[type='file'] {
   border: none;
@@ -26,16 +25,14 @@ input[type='file'] {
   line-height: 1.25rem;
   font-weight: 500;
 }
-input::placeholder{
+input::placeholder {
   color: hsl(var(--muted-foreground));
 }
-input:focus{
+input:focus {
   outline: none;
   box-shadow: 0 0 0 calc(0px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
-input:disabled{
+input:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
-
-

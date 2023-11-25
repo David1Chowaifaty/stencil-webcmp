@@ -1,4 +1,4 @@
-type InputType = 
+type InputType =
   | 'button'
   | 'checkbox'
   | 'color'

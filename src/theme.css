@@ -215,6 +215,15 @@ button {
 .ring-8 {
   box-shadow: 0 0 0 calc(8px + var(--cm-ring-offset-width)) hsl(var(--ring));
 }
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
 .sr-only {
   position: absolute;
   width: 1px;
