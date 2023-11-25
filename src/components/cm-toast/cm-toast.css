@@ -6,7 +6,7 @@ div {
 }
 :host {
   --rd-viewport-padding: 25px;
-  --rd-element-width: 200px;
+  --rd-element-width: 300px;
   --rd-success: #2b9a66;
   position: fixed;
   bottom: 0;
@@ -90,7 +90,7 @@ h6 {
   background-color: hsl(var(--destructive));
 }
 .ToastRoot {
-  min-width: var(--rd-element-width);
+  width: var(--rd-element-width);
   background-color: hsl(var(--background));
   border-radius: var(--radius);
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;

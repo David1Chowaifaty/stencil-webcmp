@@ -67,8 +67,7 @@ export class CmDropdown {
   handleSearch() {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      const filterdNames = this.itemNames.filter(item => item.item.toLowerCase().includes(this.searchQuery.toLowerCase()));
-      this.filteredItemNames = filterdNames.length > 0 ? filterdNames : [];
+      this.filteredItemNames = this.itemNames.filter(item => item.item.toLowerCase().includes(this.searchQuery.toLowerCase()));
     }, 100);
     if (this.searchQuery === '') {
       this.filteredItemNames = [...this.itemNames];

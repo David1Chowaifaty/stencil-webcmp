@@ -1,0 +1,127 @@
+:host {
+  display: block;
+  --selected-color: hsl(217.2, 91.2%, 59.8%);
+  color: hsl(var(--foreground));
+  width: 100%;
+}
+.title {
+  display: block;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.circle-btn {
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+.circle-btn[data-state='checked'] {
+  outline: 1px solid var(--selected-color);
+  outline-offset: 2px;
+}
+.blue {
+  background: hsl(217.2, 91.2%, 59.8%);
+  --selected-color: hsl(217.2, 91.2%, 59.8%);
+}
+.yellow {
+  background: hsl(47.9, 95.8%, 53.1%);
+  --selected-color: hsl(47.9, 95.8%, 53.1%);
+}
+.green {
+  background: hsl(142.1, 76.2%, 36.3%);
+  --selected-color: hsl(142.1, 76.2%, 36.3%);
+}
+.features,
+.title-section,
+.component-container,
+.reference {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.component-container {
+  margin-top: 20px;
+  margin-bottom: 60px;
+
+  padding: 20px 0;
+}
+.features h3,
+.reference h3 {
+  color: hsla(var(--foreground), 0.9);
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.title-section p,
+.reference p {
+  color: hsla(var(--foreground), 0.8);
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.features p {
+  color: hsla(var(--foreground), 0.6);
+  font-size: 14px;
+}
+.table-container {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--radius);
+}
+table {
+  width: 100%;
+  caption-side: bottom;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: var(--radius);
+  border-color: hsl(var(--border));
+}
+thead {
+  border-bottom: 1px solid hsl(var(--border));
+  background: hsl(var(--muted));
+  border-radius: var(--radius);
+  margin: 0;
+  border-color: inherit;
+}
+thead:hover {
+  background: hsla(var(--muted), 0.8);
+  border-color: inherit;
+}
+tr {
+  border-bottom: 1px solid hsl(var(--border));
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+tr:hover {
+  background: hsla(var(--muted), 0.5);
+}
+th {
+  height: 2.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: left;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  color: hsl(var(--muted-foreground));
+}
+.buttons-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
