@@ -19,6 +19,13 @@ export const inputProperties: { prop: string; type: any; default: any }[] = [
   { prop: 'size', type: 'number', default: 'null' },
   { prop: 'multiple', type: 'boolean', default: 'false' },
 ];
+export const inputFeatures: string[] = [
+  'Supports various input types (text, number, email, etc.)',
+  "Configurable properties: 'name', 'placeholder', 'value', 'inputid', 'class'",
+  "Optional attributes: 'required', 'disabled', 'readonly', 'maxlength', 'min', 'max', 'step', 'pattern', 'autocomplete', 'autofocus', 'size', 'multiple'",
+  'Designed for flexible integration in forms and UIs',
+];
+export const inputEventProperties: { prop: string; type: any }[] = [{ prop: 'textChanged', type: 'string' }];
 /*Switch */
 export const switchProperties: { prop: string; type: any; default: any }[] = [
   { prop: 'name', type: 'string', default: '_' },

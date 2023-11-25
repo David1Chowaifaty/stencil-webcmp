@@ -46,6 +46,8 @@
 h1 {
   font-size: 24px;
   font-weight: 700;
+  display: block;
+  margin-bottom: 10px;
 }
 .component-container {
   margin-top: 20px;
@@ -70,6 +72,20 @@ h1 {
 .features p {
   color: hsla(var(--foreground), 0.6);
   font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.features p span {
+  height: 18px;
+  width: 18px;
+  border-radius: 12px;
+  background: hsla(var(--primary), 0.4);
+  border: 1px solid hsl(var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  color: hsl(var(--primary-foreground));
 }
 .table-container {
   position: relative;
@@ -124,4 +140,5 @@ td {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 20px;
 }
