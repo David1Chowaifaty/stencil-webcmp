@@ -1,0 +1,36 @@
+import { Component, Host, Prop, h } from '@stencil/core';
+
+@Component({
+  tag: 'cm-input',
+  styleUrl: 'cm-input.css',
+ scoped:true
+})
+export class CmInput {
+@Prop({reflect:true}) type:InputType
+@Prop({reflect:true}) name:string
+@Prop({reflect:true}) placeholder:string
+@Prop({reflect:true}) value:string
+@Prop({reflect:true}) inputid:string
+@Prop({reflect:true}) class:string
+@Prop({reflect:true}) required:boolean
+@Prop({reflect:true}) disabled:boolean
+@Prop({reflect:true}) readonly:boolean
+@Prop({reflect:true}) maxlength:number
+@Prop({reflect:true}) min:string|number
+@Prop({reflect:true}) max:string|number
+@Prop({reflect:true}) step:string|number
+@Prop({reflect:true}) pattern:string
+@Prop({reflect:true}) autocomplete:string
+@Prop({reflect:true}) autofocus:boolean
+@Prop({reflect:true}) size:number
+@Prop({reflect:true}) multiple:boolean
+
+  render() {
+    return (
+      <Host>
+       <input  placeholder='Email'/>
+      </Host>
+    );
+  }
+
+}

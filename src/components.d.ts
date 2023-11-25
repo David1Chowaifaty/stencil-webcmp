@@ -33,6 +33,26 @@ export namespace Components {
         "rtl": boolean;
         "search": boolean;
     }
+    interface CmInput {
+        "autocomplete": string;
+        "autofocus": boolean;
+        "class": string;
+        "disabled": boolean;
+        "inputid": string;
+        "max": string|number;
+        "maxlength": number;
+        "min": string|number;
+        "multiple": boolean;
+        "name": string;
+        "pattern": string;
+        "placeholder": string;
+        "readonly": boolean;
+        "required": boolean;
+        "size": number;
+        "step": string|number;
+        "type": InputType;
+        "value": string;
+    }
     interface CmSpinner {
     }
     interface CmSwitch {
@@ -128,6 +148,12 @@ declare global {
         prototype: HTMLCmDropdownElement;
         new (): HTMLCmDropdownElement;
     };
+    interface HTMLCmInputElement extends Components.CmInput, HTMLStencilElement {
+    }
+    var HTMLCmInputElement: {
+        prototype: HTMLCmInputElement;
+        new (): HTMLCmInputElement;
+    };
     interface HTMLCmSpinnerElement extends Components.CmSpinner, HTMLStencilElement {
     }
     var HTMLCmSpinnerElement: {
@@ -173,6 +199,7 @@ declare global {
         "cm-card": HTMLCmCardElement;
         "cm-checkbox": HTMLCmCheckboxElement;
         "cm-dropdown": HTMLCmDropdownElement;
+        "cm-input": HTMLCmInputElement;
         "cm-spinner": HTMLCmSpinnerElement;
         "cm-switch": HTMLCmSwitchElement;
         "cm-toast": HTMLCmToastElement;
@@ -207,6 +234,26 @@ declare namespace LocalJSX {
         "rtl"?: boolean;
         "search"?: boolean;
     }
+    interface CmInput {
+        "autocomplete"?: string;
+        "autofocus"?: boolean;
+        "class"?: string;
+        "disabled"?: boolean;
+        "inputid"?: string;
+        "max"?: string|number;
+        "maxlength"?: number;
+        "min"?: string|number;
+        "multiple"?: boolean;
+        "name"?: string;
+        "pattern"?: string;
+        "placeholder"?: string;
+        "readonly"?: boolean;
+        "required"?: boolean;
+        "size"?: number;
+        "step"?: string|number;
+        "type"?: InputType;
+        "value"?: string;
+    }
     interface CmSpinner {
     }
     interface CmSwitch {
@@ -228,6 +275,7 @@ declare namespace LocalJSX {
         "cm-card": CmCard;
         "cm-checkbox": CmCheckbox;
         "cm-dropdown": CmDropdown;
+        "cm-input": CmInput;
         "cm-spinner": CmSpinner;
         "cm-switch": CmSwitch;
         "cm-toast": CmToast;
@@ -241,6 +289,7 @@ declare module "@stencil/core" {
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
             "cm-checkbox": LocalJSX.CmCheckbox & JSXBase.HTMLAttributes<HTMLCmCheckboxElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
+            "cm-input": LocalJSX.CmInput & JSXBase.HTMLAttributes<HTMLCmInputElement>;
             "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
             "cm-switch": LocalJSX.CmSwitch & JSXBase.HTMLAttributes<HTMLCmSwitchElement>;
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;
