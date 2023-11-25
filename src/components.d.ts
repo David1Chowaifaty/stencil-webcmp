@@ -33,6 +33,8 @@ export namespace Components {
         "rtl": boolean;
         "search": boolean;
     }
+    interface CmMainApp {
+    }
     interface CmSpinner {
     }
     interface CmSwitch {
@@ -61,6 +63,10 @@ export interface CmCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface CmDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCmDropdownElement;
+}
+export interface CmMainAppCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCmMainAppElement;
 }
 export interface CmSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -128,6 +134,23 @@ declare global {
         prototype: HTMLCmDropdownElement;
         new (): HTMLCmDropdownElement;
     };
+    interface HTMLCmMainAppElementEventMap {
+        "toast": IToast;
+    }
+    interface HTMLCmMainAppElement extends Components.CmMainApp, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCmMainAppElementEventMap>(type: K, listener: (this: HTMLCmMainAppElement, ev: CmMainAppCustomEvent<HTMLCmMainAppElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCmMainAppElementEventMap>(type: K, listener: (this: HTMLCmMainAppElement, ev: CmMainAppCustomEvent<HTMLCmMainAppElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCmMainAppElement: {
+        prototype: HTMLCmMainAppElement;
+        new (): HTMLCmMainAppElement;
+    };
     interface HTMLCmSpinnerElement extends Components.CmSpinner, HTMLStencilElement {
     }
     var HTMLCmSpinnerElement: {
@@ -173,6 +196,7 @@ declare global {
         "cm-card": HTMLCmCardElement;
         "cm-checkbox": HTMLCmCheckboxElement;
         "cm-dropdown": HTMLCmDropdownElement;
+        "cm-main-app": HTMLCmMainAppElement;
         "cm-spinner": HTMLCmSpinnerElement;
         "cm-switch": HTMLCmSwitchElement;
         "cm-toast": HTMLCmToastElement;
@@ -207,6 +231,9 @@ declare namespace LocalJSX {
         "rtl"?: boolean;
         "search"?: boolean;
     }
+    interface CmMainApp {
+        "onToast"?: (event: CmMainAppCustomEvent<IToast>) => void;
+    }
     interface CmSpinner {
     }
     interface CmSwitch {
@@ -228,6 +255,7 @@ declare namespace LocalJSX {
         "cm-card": CmCard;
         "cm-checkbox": CmCheckbox;
         "cm-dropdown": CmDropdown;
+        "cm-main-app": CmMainApp;
         "cm-spinner": CmSpinner;
         "cm-switch": CmSwitch;
         "cm-toast": CmToast;
@@ -241,6 +269,7 @@ declare module "@stencil/core" {
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
             "cm-checkbox": LocalJSX.CmCheckbox & JSXBase.HTMLAttributes<HTMLCmCheckboxElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
+            "cm-main-app": LocalJSX.CmMainApp & JSXBase.HTMLAttributes<HTMLCmMainAppElement>;
             "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
             "cm-switch": LocalJSX.CmSwitch & JSXBase.HTMLAttributes<HTMLCmSwitchElement>;
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;

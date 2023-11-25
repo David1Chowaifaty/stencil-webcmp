@@ -11,6 +11,7 @@
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
         document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+        document.body.className = "blue"
       } else if (prefersDark) {
         document.body.classList.add('dark-theme');
         localStorage.setItem('theme', 'dark');
@@ -52,7 +53,8 @@
 </head>
 
 <body>
-  <cm-button id="theme-button" class="my-30">Toggle theme</cm-button>
+  <cm-main-app></cm-main-app>
+  <!-- <cm-button id="theme-button" class="my-30">Toggle theme</cm-button>
   <cm-switch></cm-switch>
   <cm-checkbox class="my-30"></cm-checkbox>
   <cm-dropdown class="my-30"></cm-dropdown>
@@ -61,7 +63,7 @@
     <cm-button variants="danger">Danger</cm-button>
     <cm-button variants="secondary">Secondary</cm-button>
     <cm-button variants="link">Link</cm-button>
-  </div>
+  </div> -->
   <script>
     function toggleTheme() {
       const isDarkTheme = document.body.classList.contains('dark-theme');
