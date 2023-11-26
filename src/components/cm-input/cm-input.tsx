@@ -9,7 +9,6 @@ export class CmInput {
   @Prop({ reflect: true }) type: InputType;
   @Prop({ reflect: true }) name: string;
   @Prop({ reflect: true }) placeholder: string;
-  @Prop({ reflect: true }) value: string;
   @Prop({ reflect: true }) inputid: string;
   @Prop({ reflect: true }) class: string;
   @Prop({ reflect: true }) required: boolean;
@@ -24,6 +23,7 @@ export class CmInput {
   @Prop({ reflect: true }) autofocus: boolean;
   @Prop({ reflect: true }) size: number;
   @Prop({ reflect: true }) multiple: boolean;
+  @Prop({ reflect: true }) value: string;
   @Event({ bubbles: true, composed: true }) textChanged: EventEmitter<string>;
 
   render() {
@@ -33,7 +33,6 @@ export class CmInput {
           type={this.type}
           name={this.name}
           placeholder={this.placeholder}
-          value={this.value}
           id={this.inputid}
           class={this.class}
           required={this.required}
@@ -48,6 +47,7 @@ export class CmInput {
           autofocus={this.autofocus}
           size={this.size}
           multiple={this.multiple}
+          value={this.value}
           onChange={e => this.textChanged.emit((e.target as HTMLInputElement).value)}
         />
       </Host>
