@@ -11,6 +11,8 @@ export class CmToast {
   @Prop({ reflect: true, mutable: true }) swipable: boolean = false;
   @State() isVisible = false;
   @State() isDragging = false;
+  @State() toastClicked = false;
+  @State() isFocused = false;
   @Event() toast: EventEmitter<IToast>;
   @Element() element: HTMLElement;
   private startX: number;
@@ -19,6 +21,16 @@ export class CmToast {
   private duration = 5000;
   private showToastTimeOut: any;
   private toastBody: IToast = { description: '', type: 'success' };
+  private eventsAdded = false;
+  componentWillLoad() {
+    this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
   handleTouchStart(event: TouchEvent) {
     this.startX = event.touches[0].clientX;
   }
@@ -63,9 +75,15 @@ export class CmToast {
       this.toastRef.style.borderColor = 'hsl(var(--destructive))';
     }
     this.showToast();
-    this.showToastTimeOut = setTimeout(() => {
-      this.hideToast();
-    }, this.duration);
+    //this.setToastTimeout();
+  }
+  @Listen('click', { target: 'document' })
+  handleDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!this.element.contains(target) && this.toastClicked) {
+      this.toastClicked = false;
+      //this.setToastTimeout();
+    }
   }
 
   handleTouchEnd() {
@@ -73,12 +91,15 @@ export class CmToast {
   }
 
   handleMouseDown(event: MouseEvent) {
+    this.clearToastTimeout();
+    this.toastClicked = true;
     this.isDragging = true;
     this.startX = event.clientX;
   }
 
   handleMouseMove(event: MouseEvent) {
     if (!this.isDragging) return;
+    console.log('mouse move');
     this.endX = event.clientX;
     const deltaX = this.startX - this.endX;
     const isLeft = this.position.includes('left');
@@ -89,20 +110,36 @@ export class CmToast {
   }
 
   handleMouseUp() {
+    console.log('mouse up');
     this.isDragging = false;
     this.handleSwipeEnd(this.startX - this.endX);
   }
+  setToastTimeout() {
+    this.showToastTimeOut = setTimeout(() => {
+      this.hideToast();
+    }, this.duration);
+  }
 
+  clearToastTimeout() {
+    if (this.showToastTimeOut) {
+      clearTimeout(this.showToastTimeOut);
+      this.showToastTimeOut = undefined;
+    }
+  }
   handleMouseLeave() {
-    if (!this.isDragging) return;
-    this.handleSwipeEnd(this.startX - this.endX);
+    // if (this.isDragging) {
+    //   this.handleSwipeEnd(this.startX - this.endX);
+    // }
+    if (this.isFocused || this.toastClicked) {
+      return;
+    }
+    //this.setToastTimeout();
   }
   updateSwipePosition(deltaX: number) {
     this.toastRef.style.setProperty('--rd-toast-swipe-move-x', `${deltaX}px`);
   }
 
   handleSwipeEnd(delta: number) {
-    console.log(delta);
     if (!isNaN(delta)) {
       const isLeft = this.position.includes('left');
       let MAX_SWIPE = isLeft ? 2500 : -2500;
@@ -111,9 +148,11 @@ export class CmToast {
         this.isDragging = false;
       }
       console.log(MAX_SWIPE);
-      if ((!isLeft && delta < -150 && delta > MAX_SWIPE) || (isLeft && delta > 150 && delta < MAX_SWIPE)) {
+      if ((!isLeft && delta <= -150 && delta >= MAX_SWIPE) || (isLeft && delta >= 150 && delta <= MAX_SWIPE)) {
         this.toastRef.style.setProperty('--rd-toast-swipe-end-x', `${-delta}px`);
         this.dismissToast();
+        this.startX = 0;
+        this.endX = 0;
       } else {
         this.resetSwipePosition();
         this.setSwipeEventToRootElement('cancel');
@@ -135,6 +174,7 @@ export class CmToast {
   }
   @Method()
   async hideToast() {
+    this.clearToastTimeout();
     this.resetSwipePosition();
     this.toastRef.setAttribute('data-state', 'close');
     this.toastRef.style.opacity = '0';
@@ -142,13 +182,13 @@ export class CmToast {
     if (this.isDragging) {
       this.isDragging = false;
     }
-    clearTimeout(this.showToastTimeOut);
     if (this.swipable) {
       this.removeEvents();
     }
   }
   @Method()
   async showToast() {
+    this.clearToastTimeout();
     this.toastRef.style.opacity = '1';
     this.toastRef.setAttribute('data-state', 'open');
     this.isVisible = true;
@@ -160,25 +200,31 @@ export class CmToast {
     if (this.swipable) {
       this.removeEvents();
     }
-    clearTimeout(this.showToastTimeOut);
+    this.clearToastTimeout();
   }
   removeEvents() {
-    this.toastRef.removeEventListener('touchstart', this.handleTouchStart.bind(this));
-    this.toastRef.removeEventListener('touchmove', this.handleTouchMove.bind(this));
-    this.toastRef.removeEventListener('touchend', this.handleTouchEnd.bind(this));
-    this.toastRef.removeEventListener('mousedown', this.handleMouseDown.bind(this));
-    this.toastRef.removeEventListener('mousemove', this.handleMouseMove.bind(this));
-    this.toastRef.removeEventListener('mouseup', this.handleMouseUp.bind(this));
-    this.toastRef.removeEventListener('mouseleave', this.handleMouseLeave.bind(this));
+    if (this.eventsAdded) {
+      this.toastRef.removeEventListener('touchstart', this.handleTouchStart);
+      this.toastRef.removeEventListener('touchmove', this.handleTouchMove);
+      this.toastRef.removeEventListener('touchend', this.handleTouchEnd);
+      this.toastRef.removeEventListener('mousedown', this.handleMouseDown);
+      this.toastRef.removeEventListener('mousemove', this.handleMouseMove);
+      this.toastRef.removeEventListener('mouseup', this.handleMouseUp);
+      // this.toastRef.removeEventListener('mouseleave', this.handleMouseLeave);
+      this.eventsAdded = false;
+    }
   }
   addEvents() {
-    this.toastRef.addEventListener('touchstart', this.handleTouchStart.bind(this));
-    this.toastRef.addEventListener('touchmove', this.handleTouchMove.bind(this));
-    this.toastRef.addEventListener('touchend', this.handleTouchEnd.bind(this));
-    this.toastRef.addEventListener('mousedown', this.handleMouseDown.bind(this));
-    this.toastRef.addEventListener('mousemove', this.handleMouseMove.bind(this));
-    this.toastRef.addEventListener('mouseup', this.handleMouseUp.bind(this));
-    this.toastRef.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+    if (!this.eventsAdded) {
+      this.toastRef.addEventListener('touchstart', this.handleTouchStart);
+      this.toastRef.addEventListener('touchmove', this.handleTouchMove);
+      this.toastRef.addEventListener('touchend', this.handleTouchEnd);
+      this.toastRef.addEventListener('mousedown', this.handleMouseDown);
+      this.toastRef.addEventListener('mousemove', this.handleMouseMove);
+      this.toastRef.addEventListener('mouseup', this.handleMouseUp);
+      this.toastRef.addEventListener('mouseleave', this.handleMouseLeave);
+      this.eventsAdded = true;
+    }
   }
   renderIcon() {
     switch (this.toastBody.type) {
@@ -212,10 +258,34 @@ export class CmToast {
         return null;
     }
   }
+  handleMouseEnter() {
+    console.log('object');
+    this.clearToastTimeout();
+  }
+  handleToastClicked() {
+    if (!this.isDragging) {
+      this.clearToastTimeout();
+      this.toastClicked = true;
+    }
+  }
+  handleFocus() {
+    this.isFocused = true;
+    this.clearToastTimeout();
+  }
   render() {
     return (
       <Host>
-        <section ref={el => (this.toastRef = el)} class={`ToastRoot`}>
+        <section
+          aria-live="off"
+          role="status"
+          aria-atomic="true"
+          tabIndex={0}
+          // onMouseLeave={this.handleMouseLeave.bind(this)}
+          // onMouseEnter={this.handleMouseEnter.bind(this)}
+          onFocus={this.handleFocus.bind(this)}
+          ref={el => (this.toastRef = el)}
+          class={`ToastRoot`}
+        >
           {this.isVisible && (
             <Fragment>
               {this.toastBody.type === 'custom' ? (

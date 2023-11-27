@@ -106,7 +106,11 @@ export class CmMainApp {
   render() {
     return (
       <Host>
-        <h1 class="title">CM Components</h1>
+        <header>
+          <h1 class="title">CM Components</h1>
+          <a href="#toast">Toast</a>
+        </header>
+
         <h1>Customize Your Experience with Themes</h1>
         <p>
           Personalize your app's look and feel by selecting a color theme that suits your style! Simply tap on one of the colored circles under the "Themes" section to switch to a
@@ -203,7 +207,7 @@ export class CmMainApp {
           </div>
         </section>
         {/*Toast */}
-        <section class="component-container">
+        <section id="toast" class="component-container">
           <div class={'title-section'}>
             <h1>Toast</h1>
             <p>A succinct message that is displayed temporarily.</p>
