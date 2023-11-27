@@ -27,6 +27,8 @@ export namespace Components {
         "required": boolean;
         "value": string;
     }
+    interface CmDialog {
+    }
     interface CmDropdown {
         "dropdownTitle": string;
         "itemNames": IItems[];
@@ -141,6 +143,12 @@ declare global {
         prototype: HTMLCmCheckboxElement;
         new (): HTMLCmCheckboxElement;
     };
+    interface HTMLCmDialogElement extends Components.CmDialog, HTMLStencilElement {
+    }
+    var HTMLCmDialogElement: {
+        prototype: HTMLCmDialogElement;
+        new (): HTMLCmDialogElement;
+    };
     interface HTMLCmDropdownElementEventMap {
         "itemClick": string;
     }
@@ -236,6 +244,7 @@ declare global {
         "cm-button": HTMLCmButtonElement;
         "cm-card": HTMLCmCardElement;
         "cm-checkbox": HTMLCmCheckboxElement;
+        "cm-dialog": HTMLCmDialogElement;
         "cm-dropdown": HTMLCmDropdownElement;
         "cm-input": HTMLCmInputElement;
         "cm-main-app": HTMLCmMainAppElement;
@@ -265,6 +274,8 @@ declare namespace LocalJSX {
         "onCheckedChange"?: (event: CmCheckboxCustomEvent<boolean>) => void;
         "required"?: boolean;
         "value"?: string;
+    }
+    interface CmDialog {
     }
     interface CmDropdown {
         "dropdownTitle"?: string;
@@ -317,6 +328,7 @@ declare namespace LocalJSX {
         "cm-button": CmButton;
         "cm-card": CmCard;
         "cm-checkbox": CmCheckbox;
+        "cm-dialog": CmDialog;
         "cm-dropdown": CmDropdown;
         "cm-input": CmInput;
         "cm-main-app": CmMainApp;
@@ -332,6 +344,7 @@ declare module "@stencil/core" {
             "cm-button": LocalJSX.CmButton & JSXBase.HTMLAttributes<HTMLCmButtonElement>;
             "cm-card": LocalJSX.CmCard & JSXBase.HTMLAttributes<HTMLCmCardElement>;
             "cm-checkbox": LocalJSX.CmCheckbox & JSXBase.HTMLAttributes<HTMLCmCheckboxElement>;
+            "cm-dialog": LocalJSX.CmDialog & JSXBase.HTMLAttributes<HTMLCmDialogElement>;
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
             "cm-input": LocalJSX.CmInput & JSXBase.HTMLAttributes<HTMLCmInputElement>;
             "cm-main-app": LocalJSX.CmMainApp & JSXBase.HTMLAttributes<HTMLCmMainAppElement>;
