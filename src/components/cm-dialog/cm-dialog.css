@@ -64,7 +64,7 @@ button {
 .IconButton:focus {
   box-shadow: 0 0 0 2px hsla(var(--muted-foreground), 0.5);
 }
-::slotted([slot='dialog-header']) {
+.dialog-title {
   font-weight: 500;
   color: hsl(var(--foreground));
   font-size: 17px;

@@ -8,6 +8,7 @@ import { Component, EventEmitter, Host, Listen, State, h, Event, Method, Fragmen
 export class CmDialog {
   @State() isDialogVisible: boolean = false;
   @Prop({ reflect: true }) isAlertDialog: boolean = false;
+  @Prop({ reflect: true }) dialogTitle: string = 'Dialog Title';
   @Element() el: HTMLElement;
   @Event() openDialog: EventEmitter<null>;
   @Event() closeDialog: EventEmitter<null>;
@@ -91,11 +92,23 @@ export class CmDialog {
     return (
       <Host>
         <div onClick={this.handleBackdropClick.bind(this)} data-state={this.isDialogVisible ? 'visible' : 'hidden'} class={'backdrop'}></div>
-        <div role="dialog" tabIndex={-1} data-state={this.isDialogVisible ? 'visible' : 'hidden'} class={'dialog'}>
+        <div
+          role="dialog"
+          aria-labelledby="dialogTitle"
+          aria-describedby="dialogDescription"
+          tabIndex={-1}
+          aria-label={this.dialogTitle}
+          data-state={this.isDialogVisible ? 'visible' : 'hidden'}
+          class={'dialog'}
+        >
           {this.isDialogVisible && (
             <Fragment>
-              <slot name="dialog-header"></slot>
-              <slot name="dialog-body"></slot>
+              <h2 class="dialog-title" id="dialogTitle">
+                {this.dialogTitle}
+              </h2>
+              <div id="dialogDescription">
+                <slot name="dialog-body"></slot>
+              </div>
               <slot name="dialog-footer"></slot>
               {!this.isAlertDialog && (
                 <button aria-label="Close" onClick={this.toggleClose.bind(this)} class={'IconButton'}>

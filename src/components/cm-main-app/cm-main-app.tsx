@@ -101,7 +101,7 @@ export class CmMainApp {
   createFeatures(data: any[]) {
     return (
       <div class="features">
-        <h3>Features</h3>
+        <p>Features</p>
         {data.map(d => (
           <p>
             <span>
@@ -137,6 +137,7 @@ export class CmMainApp {
             </ul>
           </nav>
           <cm-button aria-label="theme-button" variants="ghost" onClick={this.toggleTheme.bind(this)}>
+            <p class={'sr-only'}>toggle theme</p>
             {this.isDarkTheme ? (
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -185,9 +186,9 @@ export class CmMainApp {
           </div>
           {this.createFeatures(buttonFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             {this.createRootTable(buttonProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(buttonEventProperties)}
           </div>
         </section>
@@ -202,9 +203,9 @@ export class CmMainApp {
 
           {this.createFeatures(checkboxFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             {this.createRootTable(checkboxProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(checkboxEvents)}
           </div>
         </section>
@@ -214,10 +215,7 @@ export class CmMainApp {
             <h1>Dialog</h1>
             <p>A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.</p>
           </div>
-          <cm-dialog>
-            <div slot="dialog-header">
-              <p>Update User</p>
-            </div>
+          <cm-dialog dialogTitle="Update User">
             <div slot="dialog-body">
               <cm-input required placeholder="Email"></cm-input>
               <cm-input placeholder="Password" type="password"></cm-input>
@@ -240,9 +238,9 @@ export class CmMainApp {
           </cm-button>
           {this.createFeatures(dialogFeatures)}
           <div class="reference">
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(dialogProperties)}
-            <h3>Public Methods</h3>
+            <p>Public Methods</p>
             {this.createRootTable(dialogMethods, dialogMethods)}
           </div>
         </section>
@@ -255,9 +253,9 @@ export class CmMainApp {
           <cm-dropdown></cm-dropdown>
           {this.createFeatures(dropdownFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             {this.createRootTable(dropdownProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(dropdownEvents)}
           </div>
         </section>
@@ -270,9 +268,9 @@ export class CmMainApp {
           <cm-input placeholder="Input"></cm-input>
           {this.createFeatures(inputFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             {this.createRootTable(inputProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(inputEventProperties)}
           </div>
         </section>
@@ -285,10 +283,10 @@ export class CmMainApp {
           <cm-switch></cm-switch>
           {this.createFeatures(switchFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             <p>Contains all the parts of a switch. An input will also render when used within a form to ensure events propagate correctly.</p>
             {this.createRootTable(switchProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(switchEventProperties)}
           </div>
         </section>
@@ -314,10 +312,10 @@ export class CmMainApp {
           </cm-button>
           {this.createFeatures(toastFeatures)}
           <div class="reference">
-            <h3>Root</h3>
+            <p>Root</p>
             <p>The toast that automatically closes. It should not be held open to acquire a user response.</p>
             {this.createRootTable(toastProperties)}
-            <h3>Events</h3>
+            <p>Events</p>
             {this.createEventTable(toastEventProperties)}
           </div>
         </section>

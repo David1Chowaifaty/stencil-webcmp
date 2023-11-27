@@ -14,8 +14,14 @@ export class CmCheckbox {
   @Prop({ reflect: true }) defaultChecked: boolean;
   @Prop({ reflect: true }) labelMessage: string;
   @Event({ bubbles: true, composed: true }) checkedChange: EventEmitter<boolean>;
+  private checkbox: HTMLElement;
+  componentDidLoad() {
+    this.checkbox.setAttribute('aria-checked', this.checked ? 'true' : 'false');
+    this.checkbox.setAttribute('role', 'checkbox');
+  }
   handleChange() {
     this.checked = !this.checked;
+    this.checkbox.setAttribute('aria-checked', this.checked ? 'true' : 'false');
     this.checkedChange.emit(this.checked);
   }
   render() {
@@ -23,10 +29,10 @@ export class CmCheckbox {
       <Host>
         <div class="root-container">
           <button
+            ref={el => (this.checkbox = el)}
             type="button"
-            role="checkbox"
+            aria-label="checkbox"
             onClick={this.handleChange.bind(this)}
-            aria-checked={this.checked}
             data-state={this.checked ? 'checked' : 'unchecked'}
             value="on"
             id="c1"
