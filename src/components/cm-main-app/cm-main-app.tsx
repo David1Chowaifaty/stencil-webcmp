@@ -110,8 +110,16 @@ export class CmMainApp {
       <Host>
         <header>
           <h1 class="title">CM Components</h1>
-          <a href="#toast">Toast</a>
-          <a href="#dialog">Dialog</a>
+          <nav>
+            <ul>
+              <li>
+                <a href="#toast">Toast</a>
+              </li>
+              <li>
+                <a href="#dialog">Dialog</a>
+              </li>
+            </ul>
+          </nav>
         </header>
 
         <h1>Customize Your Experience with Themes</h1>
@@ -177,8 +185,8 @@ export class CmMainApp {
               <p>body</p>
             </div>
             <div slot="dialog-footer">
-             <cm-button variants='secondary'>cancel</cm-button>
-             <cm-button variants='danger'>delete</cm-button>
+              <cm-button variants="secondary">cancel</cm-button>
+              <cm-button variants="danger">delete</cm-button>
             </div>
           </cm-dialog>
           <cm-button

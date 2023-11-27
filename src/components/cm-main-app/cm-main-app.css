@@ -6,9 +6,9 @@
 }
 .title {
   display: block;
-  margin-bottom: 30px;
   font-size: 24px;
   font-weight: bold;
+  margin: 0;
 }
 .circle-btn {
   height: 25px;
@@ -54,6 +54,28 @@ h1 {
   margin-bottom: 60px;
 
   padding: 20px 0;
+}
+nav ul li {
+  list-style: none;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+nav ul li a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+nav ul li a:hover {
+  color: hsl(var(--primary));
+}
+nav ul {
+  display: flex;
+  gap: 20px;
 }
 .features h3,
 .reference h3 {
