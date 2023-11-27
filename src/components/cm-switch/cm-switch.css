@@ -1,8 +1,8 @@
 :host {
   display: block;
-  --switch-root-width: 36px;
-  --switch-root-height: 20px;
-  --switch-thumb-size: calc(var(--switch-root-height) - 2px);
+  --switch-root-width: 38px;
+  --switch-root-height: 24px;
+  --switch-thumb-size: calc(var(--switch-root-height) - 6px);
 }
 input {
   opacity: 0;
@@ -62,5 +62,5 @@ input {
   user-select: none;
 }
 .SwitchRoot[data-state='checked'] .SwitchThumb {
-  transform: translateX(calc(var(--switch-root-width) - 2px - var(--switch-thumb-size)));
+  transform: translateX(calc(var(--switch-root-width) - 6px - var(--switch-thumb-size)));
 }

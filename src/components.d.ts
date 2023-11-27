@@ -205,6 +205,7 @@ declare global {
     interface HTMLCmMainAppElementEventMap {
         "toast": IToast;
         "openDialog": null;
+        "closeDialog": null;
     }
     interface HTMLCmMainAppElement extends Components.CmMainApp, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCmMainAppElementEventMap>(type: K, listener: (this: HTMLCmMainAppElement, ev: CmMainAppCustomEvent<HTMLCmMainAppElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -329,6 +330,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface CmMainApp {
+        "onCloseDialog"?: (event: CmMainAppCustomEvent<null>) => void;
         "onOpenDialog"?: (event: CmMainAppCustomEvent<null>) => void;
         "onToast"?: (event: CmMainAppCustomEvent<IToast>) => void;
     }

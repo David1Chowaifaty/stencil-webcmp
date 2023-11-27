@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, State, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, Host, State, h } from '@stencil/core';
 import {
   buttonEventProperties,
   buttonFeatures,
@@ -6,6 +6,9 @@ import {
   checkboxEvents,
   checkboxFeatures,
   checkboxProperties,
+  dialogFeatures,
+  dialogMethods,
+  dialogProperties,
   dropdownEvents,
   dropdownFeatures,
   dropdownProperties,
@@ -31,6 +34,7 @@ export class CmMainApp {
   @State() selectedColor = this.defaultThemesColor[0];
   @Event() toast: EventEmitter<IToast>;
   @Event() openDialog: EventEmitter<null>;
+  @Event() closeDialog: EventEmitter<null>;
   @State() isDarkTheme: boolean = false;
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
@@ -41,15 +45,21 @@ export class CmMainApp {
     this.selectedColor = color;
     document.body.className = this.isDarkTheme ? `dark-theme ${this.selectedColor}` : this.selectedColor;
   }
-  createRootTable(data: any[]) {
+  createRootTable(data: any[], options: any = {}) {
     return (
       <div class={'table-container'}>
         <table>
           <thead>
             <tr>
-              <th>Prop</th>
-              <th>Type</th>
-              <th>Default</th>
+              {Object.keys(options).length > 0 ? (
+                Object.keys(options[0]).map(opt => <th>{opt}</th>)
+              ) : (
+                <Fragment>
+                  <th>Prop</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                </Fragment>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -202,21 +212,23 @@ export class CmMainApp {
         <section id="dialog" class="component-container">
           <div class={'title-section'}>
             <h1>Dialog</h1>
-            <p>A succinct message that is displayed temporarily.</p>
+            <p>A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.</p>
           </div>
           <cm-dialog>
             <div slot="dialog-header">
-              <p>title</p>
+              <p>Update User</p>
             </div>
             <div slot="dialog-body">
-              <p>body</p>
-              <cm-input placeholder="Input"></cm-input>
-              <cm-input placeholder="Input"></cm-input>
-              <cm-dropdown></cm-dropdown>
+              <cm-input required placeholder="Email"></cm-input>
+              <cm-input placeholder="Password" type="password"></cm-input>
             </div>
             <div slot="dialog-footer">
-              <cm-button variants="secondary">cancel</cm-button>
-              <cm-button variants="danger">delete</cm-button>
+              <cm-button onButtonClicked={() => this.closeDialog.emit(null)} variants="secondary">
+                cancel
+              </cm-button>
+              <cm-button onButtonClicked={() => this.closeDialog.emit(null)} variants="danger">
+                delete
+              </cm-button>
             </div>
           </cm-dialog>
           <cm-button
@@ -226,13 +238,12 @@ export class CmMainApp {
           >
             Open Dialog
           </cm-button>
-          {this.createFeatures(toastFeatures)}
+          {this.createFeatures(dialogFeatures)}
           <div class="reference">
-            <h3>Root</h3>
-            <p>The toast that automatically closes. It should not be held open to acquire a user response.</p>
-            {this.createRootTable(toastProperties)}
             <h3>Events</h3>
-            {this.createEventTable(toastEventProperties)}
+            {this.createEventTable(dialogProperties)}
+            <h3>Public Methods</h3>
+            {this.createRootTable(dialogMethods, dialogMethods)}
           </div>
         </section>
         {/*Dropdown */}

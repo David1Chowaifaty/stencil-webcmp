@@ -7,10 +7,11 @@
 
 ## Events
 
-| Event        | Description | Type                                                                                                 |
-| ------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
-| `openDialog` |             | `CustomEvent<null>`                                                                                  |
-| `toast`      |             | `CustomEvent<ICustomToast & Partial<IToastWithButton> \| IDefaultToast & Partial<IToastWithButton>>` |
+| Event         | Description | Type                                                                                                 |
+| ------------- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| `closeDialog` |             | `CustomEvent<null>`                                                                                  |
+| `openDialog`  |             | `CustomEvent<null>`                                                                                  |
+| `toast`       |             | `CustomEvent<ICustomToast & Partial<IToastWithButton> \| IDefaultToast & Partial<IToastWithButton>>` |
 
 
 ## Dependencies
