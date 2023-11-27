@@ -56,7 +56,9 @@ export class CmDialog {
   }
 
   handleKeyDown(e: KeyboardEvent) {
-    if (!this.isDialogVisible || e.key !== 'Tab') return;
+    if (e.key === 'Escape') {
+      this.toggleClose();
+    } else if (!this.isDialogVisible || e.key !== 'Tab') return;
 
     const activeElement = document.activeElement.shadowRoot ? document.activeElement.shadowRoot.activeElement : document.activeElement;
 
@@ -89,7 +91,7 @@ export class CmDialog {
     return (
       <Host>
         <div onClick={this.handleBackdropClick.bind(this)} data-state={this.isDialogVisible ? 'visible' : 'hidden'} class={'backdrop'}></div>
-        <div tabIndex={-1} data-state={this.isDialogVisible ? 'visible' : 'hidden'} class={'dialog'}>
+        <div role="dialog" tabIndex={-1} data-state={this.isDialogVisible ? 'visible' : 'hidden'} class={'dialog'}>
           {this.isDialogVisible && (
             <Fragment>
               <slot name="dialog-header"></slot>

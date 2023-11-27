@@ -136,7 +136,7 @@ export class CmMainApp {
               <li></li>
             </ul>
           </nav>
-          <cm-button variants="ghost" onClick={this.toggleTheme.bind(this)}>
+          <cm-button aria-label="theme-button" variants="ghost" onClick={this.toggleTheme.bind(this)}>
             {this.isDarkTheme ? (
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
