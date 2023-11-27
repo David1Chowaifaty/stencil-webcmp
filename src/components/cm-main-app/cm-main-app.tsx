@@ -30,6 +30,8 @@ export class CmMainApp {
   private defaultThemesColor = ['blue', 'yellow', 'green'];
   @State() selectedColor = this.defaultThemesColor[0];
   @Event() toast: EventEmitter<IToast>;
+  @Event() openDialog: EventEmitter<null>;
+
   handleThemeChange(color: string) {
     this.selectedColor = color;
     document.body.className = `${color}`;
@@ -109,6 +111,7 @@ export class CmMainApp {
         <header>
           <h1 class="title">CM Components</h1>
           <a href="#toast">Toast</a>
+          <a href="#dialog">Dialog</a>
         </header>
 
         <h1>Customize Your Experience with Themes</h1>
@@ -158,6 +161,40 @@ export class CmMainApp {
             {this.createRootTable(checkboxProperties)}
             <h3>Events</h3>
             {this.createEventTable(checkboxEvents)}
+          </div>
+        </section>
+        {/* Dialog*/}
+        <section id="dialog" class="component-container">
+          <div class={'title-section'}>
+            <h1>Dialog</h1>
+            <p>A succinct message that is displayed temporarily.</p>
+          </div>
+          <cm-dialog>
+            <div slot="dialog-header">
+              <p>title</p>
+            </div>
+            <div slot="dialog-body">
+              <p>body</p>
+            </div>
+            <div slot="dialog-footer">
+             <cm-button variants='secondary'>cancel</cm-button>
+             <cm-button variants='danger'>delete</cm-button>
+            </div>
+          </cm-dialog>
+          <cm-button
+            onButtonClicked={() => {
+              this.openDialog.emit(null);
+            }}
+          >
+            Open Dialog
+          </cm-button>
+          {this.createFeatures(toastFeatures)}
+          <div class="reference">
+            <h3>Root</h3>
+            <p>The toast that automatically closes. It should not be held open to acquire a user response.</p>
+            {this.createRootTable(toastProperties)}
+            <h3>Events</h3>
+            {this.createEventTable(toastEventProperties)}
           </div>
         </section>
         {/*Dropdown */}

@@ -28,6 +28,8 @@ export namespace Components {
         "value": string;
     }
     interface CmDialog {
+        "toggleClose": () => Promise<void>;
+        "toggleOpen": () => Promise<void>;
     }
     interface CmDropdown {
         "dropdownTitle": string;
@@ -81,6 +83,10 @@ export interface CmButtonCustomEvent<T> extends CustomEvent<T> {
 export interface CmCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCmCheckboxElement;
+}
+export interface CmDialogCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCmDialogElement;
 }
 export interface CmDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -143,7 +149,19 @@ declare global {
         prototype: HTMLCmCheckboxElement;
         new (): HTMLCmCheckboxElement;
     };
+    interface HTMLCmDialogElementEventMap {
+        "openDialog": null;
+        "closeDialog": null;
+    }
     interface HTMLCmDialogElement extends Components.CmDialog, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCmDialogElementEventMap>(type: K, listener: (this: HTMLCmDialogElement, ev: CmDialogCustomEvent<HTMLCmDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCmDialogElementEventMap>(type: K, listener: (this: HTMLCmDialogElement, ev: CmDialogCustomEvent<HTMLCmDialogElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLCmDialogElement: {
         prototype: HTMLCmDialogElement;
@@ -185,6 +203,7 @@ declare global {
     };
     interface HTMLCmMainAppElementEventMap {
         "toast": IToast;
+        "openDialog": null;
     }
     interface HTMLCmMainAppElement extends Components.CmMainApp, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCmMainAppElementEventMap>(type: K, listener: (this: HTMLCmMainAppElement, ev: CmMainAppCustomEvent<HTMLCmMainAppElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -276,6 +295,8 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface CmDialog {
+        "onCloseDialog"?: (event: CmDialogCustomEvent<null>) => void;
+        "onOpenDialog"?: (event: CmDialogCustomEvent<null>) => void;
     }
     interface CmDropdown {
         "dropdownTitle"?: string;
@@ -306,6 +327,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface CmMainApp {
+        "onOpenDialog"?: (event: CmMainAppCustomEvent<null>) => void;
         "onToast"?: (event: CmMainAppCustomEvent<IToast>) => void;
     }
     interface CmSpinner {
