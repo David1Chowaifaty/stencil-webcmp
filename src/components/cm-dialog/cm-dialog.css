@@ -4,7 +4,7 @@
 .dialog {
   opacity: 0;
   pointer-events: none;
-  background-color: white;
+  background-color: hsl(var(--background));
   border-radius: 6px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
@@ -16,6 +16,7 @@
   max-height: 85vh;
   padding: 25px;
   z-index: 1000;
+  box-sizing: border-box;
 }
 .dialog[data-state='hidden'] {
   opacity: 0;
@@ -63,8 +64,26 @@ button {
 .IconButton:focus {
   box-shadow: 0 0 0 2px hsla(var(--muted-foreground), 0.5);
 }
+::slotted([slot='dialog-header']) {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  font-size: 17px;
+}
 
+::slotted([slot='dialog-body']) {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0 20px;
+  color: hsla(var(--foreground), 0.7);
+  font-size: 15px;
+  line-height: 1.5;
+}
 ::slotted([slot='dialog-footer']) {
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   align-items: center;

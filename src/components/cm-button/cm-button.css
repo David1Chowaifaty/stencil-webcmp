@@ -57,6 +57,9 @@ button:focus-visible {
 .link:hover {
   text-decoration: underline;
 }
+.ghost:hover {
+  background: hsla(var(--muted));
+}
 
 .spinner {
   height: 24px;
