@@ -4,7 +4,7 @@
 .dialog {
   opacity: 0;
   pointer-events: none;
-  background-color: hsl(var(--background));
+  background-color: hsl(var(--popover));
   border-radius: 6px;
   box-shadow: hsla(var(--background) / 35%) 0px 10px 38px -10px, hsl(var(--background) / 20%) 0px 10px 20px -15px;
   position: fixed;

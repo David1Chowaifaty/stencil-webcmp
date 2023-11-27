@@ -166,6 +166,10 @@ body.dark-theme.green {
 *::after {
   box-sizing: border-box;
 }
+*::selection {
+  background: hsla(var(--primary), 0.4);
+  color: hsl(var(--foreground));
+}
 body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
