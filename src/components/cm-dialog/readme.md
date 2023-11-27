@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property        | Attribute         | Description | Type      | Default |
-| --------------- | ----------------- | ----------- | --------- | ------- |
-| `isAlertDialog` | `is-alert-dialog` |             | `boolean` | `false` |
+| Property        | Attribute         | Description | Type      | Default          |
+| --------------- | ----------------- | ----------- | --------- | ---------------- |
+| `dialogTitle`   | `dialog-title`    |             | `string`  | `'Dialog Title'` |
+| `isAlertDialog` | `is-alert-dialog` |             | `boolean` | `false`          |
 
 
 ## Events
