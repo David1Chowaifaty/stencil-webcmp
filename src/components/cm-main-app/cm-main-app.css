@@ -3,6 +3,8 @@
   --selected-color: hsl(217.2, 91.2%, 59.8%);
   color: hsl(var(--foreground));
   width: 100%;
+  overflow-x: hidden;
+  padding: 0 24px;
 }
 
 .title {
