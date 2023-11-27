@@ -177,7 +177,7 @@ export class CmMainApp {
             <h1>Dialog</h1>
             <p>A succinct message that is displayed temporarily.</p>
           </div>
-          <cm-dialog>
+          <cm-dialog isAlertDialog>
             <div slot="dialog-header">
               <p>title</p>
             </div>

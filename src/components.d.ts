@@ -28,6 +28,7 @@ export namespace Components {
         "value": string;
     }
     interface CmDialog {
+        "isAlertDialog": boolean;
         "toggleClose": () => Promise<void>;
         "toggleOpen": () => Promise<void>;
     }
@@ -295,6 +296,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface CmDialog {
+        "isAlertDialog"?: boolean;
         "onCloseDialog"?: (event: CmDialogCustomEvent<null>) => void;
         "onOpenDialog"?: (event: CmDialogCustomEvent<null>) => void;
     }
