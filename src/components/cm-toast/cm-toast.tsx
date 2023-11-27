@@ -75,14 +75,14 @@ export class CmToast {
       this.toastRef.style.borderColor = 'hsl(var(--destructive))';
     }
     this.showToast();
-    //this.setToastTimeout();
+    this.setToastTimeout();
   }
   @Listen('click', { target: 'document' })
   handleDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (!this.element.contains(target) && this.toastClicked) {
       this.toastClicked = false;
-      //this.setToastTimeout();
+      this.setToastTimeout();
     }
   }
 
@@ -99,7 +99,6 @@ export class CmToast {
 
   handleMouseMove(event: MouseEvent) {
     if (!this.isDragging) return;
-    console.log('mouse move');
     this.endX = event.clientX;
     const deltaX = this.startX - this.endX;
     const isLeft = this.position.includes('left');
@@ -110,7 +109,7 @@ export class CmToast {
   }
 
   handleMouseUp() {
-    console.log('mouse up');
+    if (!this.isDragging) return;
     this.isDragging = false;
     this.handleSwipeEnd(this.startX - this.endX);
   }
@@ -127,13 +126,10 @@ export class CmToast {
     }
   }
   handleMouseLeave() {
-    // if (this.isDragging) {
-    //   this.handleSwipeEnd(this.startX - this.endX);
-    // }
-    if (this.isFocused || this.toastClicked) {
+    if (this.isFocused || this.toastClicked || this.isDragging) {
       return;
     }
-    //this.setToastTimeout();
+    this.setToastTimeout();
   }
   updateSwipePosition(deltaX: number) {
     this.toastRef.style.setProperty('--rd-toast-swipe-move-x', `${deltaX}px`);
@@ -147,8 +143,7 @@ export class CmToast {
         MAX_SWIPE = isLeft ? 280 : -280;
         this.isDragging = false;
       }
-      console.log(MAX_SWIPE);
-      if ((!isLeft && delta <= -150 && delta >= MAX_SWIPE) || (isLeft && delta >= 150 && delta <= MAX_SWIPE)) {
+      if ((!isLeft && delta <= -100 && delta >= MAX_SWIPE) || (isLeft && delta >= 100 && delta <= MAX_SWIPE)) {
         this.toastRef.style.setProperty('--rd-toast-swipe-end-x', `${-delta}px`);
         this.dismissToast();
         this.startX = 0;
@@ -208,9 +203,9 @@ export class CmToast {
       this.toastRef.removeEventListener('touchmove', this.handleTouchMove);
       this.toastRef.removeEventListener('touchend', this.handleTouchEnd);
       this.toastRef.removeEventListener('mousedown', this.handleMouseDown);
-      this.toastRef.removeEventListener('mousemove', this.handleMouseMove);
-      this.toastRef.removeEventListener('mouseup', this.handleMouseUp);
-      // this.toastRef.removeEventListener('mouseleave', this.handleMouseLeave);
+      document.removeEventListener('mousemove', this.handleMouseMove);
+      document.removeEventListener('mouseup', this.handleMouseUp);
+      this.toastRef.removeEventListener('mouseleave', this.handleMouseLeave);
       this.eventsAdded = false;
     }
   }
@@ -220,8 +215,8 @@ export class CmToast {
       this.toastRef.addEventListener('touchmove', this.handleTouchMove);
       this.toastRef.addEventListener('touchend', this.handleTouchEnd);
       this.toastRef.addEventListener('mousedown', this.handleMouseDown);
-      this.toastRef.addEventListener('mousemove', this.handleMouseMove);
-      this.toastRef.addEventListener('mouseup', this.handleMouseUp);
+      document.addEventListener('mousemove', this.handleMouseMove);
+      document.addEventListener('mouseup', this.handleMouseUp);
       this.toastRef.addEventListener('mouseleave', this.handleMouseLeave);
       this.eventsAdded = true;
     }
@@ -259,7 +254,6 @@ export class CmToast {
     }
   }
   handleMouseEnter() {
-    console.log('object');
     this.clearToastTimeout();
   }
   handleToastClicked() {
@@ -280,8 +274,8 @@ export class CmToast {
           role="status"
           aria-atomic="true"
           tabIndex={0}
-          // onMouseLeave={this.handleMouseLeave.bind(this)}
-          // onMouseEnter={this.handleMouseEnter.bind(this)}
+          onMouseLeave={this.handleMouseLeave.bind(this)}
+          onMouseEnter={this.handleMouseEnter.bind(this)}
           onFocus={this.handleFocus.bind(this)}
           ref={el => (this.toastRef = el)}
           class={`ToastRoot`}
