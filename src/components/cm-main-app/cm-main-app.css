@@ -5,6 +5,7 @@
   width: 100%;
   overflow-x: hidden;
   padding: 0 24px;
+  position: relative;
 }
 
 .title {
@@ -127,4 +128,7 @@ nav ul {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 20px;
+}
+.burger-menu-navigation ul{
+  flex-direction: column;
 }

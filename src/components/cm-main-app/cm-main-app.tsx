@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Fragment, Host, State, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Fragment, Host, State, h } from '@stencil/core';
 import {
   buttonEventProperties,
   buttonFeatures,
@@ -15,6 +15,7 @@ import {
   inputEventProperties,
   inputFeatures,
   inputProperties,
+  navigationLinks,
   switchEventProperties,
   switchFeatures,
   switchProperties,
@@ -34,8 +35,14 @@ export class CmMainApp {
   @State() selectedColor = this.defaultThemesColor[0];
   @Event() toast: EventEmitter<IToast>;
   @Event() openDialog: EventEmitter<null>;
+  @Event() openSheet: EventEmitter<null>;
+  @Event() closeSheet: EventEmitter<null>;
   @Event() closeDialog: EventEmitter<null>;
   @State() isDarkTheme: boolean = false;
+  @Element() element: HTMLElement;
+
+  private burgerMenuSheet: any;
+  private sheetReference: any;
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
     document.body.className = this.isDarkTheme ? `dark-theme ${this.selectedColor}` : this.selectedColor;
@@ -124,17 +131,39 @@ export class CmMainApp {
     return (
       <Host>
         <header>
-          <h1 class="title">CM Components</h1>
+          <div class={'burger-menu'}>
+            <cm-button
+              onButtonClicked={() => {
+                this.burgerMenuSheet.toggleOpen();
+              }}
+              variants="ghost"
+            >
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M2.5 4C2.22386 4 2 4.22386 2 4.5C2 4.77614 2.22386 5 2.5 5H12.5C12.7761 5 13 4.77614 13 4.5C13 4.22386 12.7761 4 12.5 4H2.5ZM2 7.5C2 7.22386 2.22386 7 2.5 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H2.5C2.22386 8 2 7.77614 2 7.5ZM2 10.5C2 10.2239 2.22386 10 2.5 10H12.5C12.7761 10 13 10.2239 13 10.5C13 10.7761 12.7761 11 12.5 11H2.5C2.22386 11 2 10.7761 2 10.5Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </cm-button>
+            <cm-sheet sheetTitle="BlueprintBits" ref={el => (this.burgerMenuSheet = el)} position="left">
+              <nav class={"burger-menu-navigation"} slot="sheet-body">
+                <ul>
+                  {navigationLinks.map(link => (
+                    <li>
+                      <a onClick={() => this.burgerMenuSheet.toggleClose()} href={`#${link.split(' ').join('').toLowerCase()}`}>
+                       {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </cm-sheet>
+          </div>
+          <h1 class="title">BlueprintBits</h1>
           <nav>
-            <ul>
-              <li>
-                <a href="#toast">Toast</a>
-              </li>
-              <li>
-                <a href="#dialog">Dialog</a>
-              </li>
-              <li></li>
-            </ul>
+            <ul></ul>
           </nav>
           <cm-button aria-label="theme-button" variants="ghost" onClick={this.toggleTheme.bind(this)}>
             <p class={'sr-only'}>toggle theme</p>
@@ -235,6 +264,42 @@ export class CmMainApp {
             }}
           >
             Open Dialog
+          </cm-button>
+          {this.createFeatures(dialogFeatures)}
+          <div class="reference">
+            <p>Events</p>
+            {this.createEventTable(dialogProperties)}
+            <p>Public Methods</p>
+            {this.createRootTable(dialogMethods, dialogMethods)}
+          </div>
+        </section>
+
+        {/* Sheet*/}
+        <section id="sheet" class="component-container">
+          <div class={'title-section'}>
+            <h1>Sheet</h1>
+            <p>A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.</p>
+          </div>
+          <cm-sheet ref={(el)=>this.sheetReference=el} sheetTitle="Update User" position="right">
+            <div slot="sheet-body">
+              <cm-input required placeholder="Email"></cm-input>
+              <cm-input placeholder="Password" type="password"></cm-input>
+            </div>
+            <div slot="sheet-footer">
+              <cm-button onButtonClicked={() => this.sheetReference.toggleClose()} variants="secondary">
+                cancel
+              </cm-button>
+              <cm-button onButtonClicked={() => this.sheetReference.toggleClose()} variants="danger">
+                delete
+              </cm-button>
+            </div>
+          </cm-sheet>
+          <cm-button
+            onButtonClicked={() => {
+              this.sheetReference.toggleOpen();
+            }}
+          >
+            Open sheet
           </cm-button>
           {this.createFeatures(dialogFeatures)}
           <div class="reference">

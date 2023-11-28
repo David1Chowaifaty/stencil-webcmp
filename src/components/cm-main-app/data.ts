@@ -136,3 +136,19 @@ export const dialogMethods = [
     Description: 'Closes the dialog.',
   },
 ];
+
+export const navigationLinks=[
+  "Alert Dialog",
+  "Buttons",
+  "Card",
+  "Checkbox",
+  "Dialog",
+  "Dropdown",
+  "Input",
+  "Sheet",  
+  "Switch",
+  "Toast",
+  "Tooltip"
+  
+  
+]

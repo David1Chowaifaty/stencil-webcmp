@@ -61,6 +61,13 @@ export namespace Components {
     }
     interface CmMainApp {
     }
+    interface CmSheet {
+        "isSheetVisible": boolean;
+        "position": 'top'|'bottom'|'right'|'left';
+        "sheetTitle": string;
+        "toggleClose": () => Promise<void>;
+        "toggleOpen": () => Promise<void>;
+    }
     interface CmSpinner {
     }
     interface CmSwitch {
@@ -101,6 +108,10 @@ export interface CmInputCustomEvent<T> extends CustomEvent<T> {
 export interface CmMainAppCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCmMainAppElement;
+}
+export interface CmSheetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCmSheetElement;
 }
 export interface CmSwitchCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -206,6 +217,8 @@ declare global {
     interface HTMLCmMainAppElementEventMap {
         "toast": IToast;
         "openDialog": null;
+        "openSheet": null;
+        "closeSheet": null;
         "closeDialog": null;
     }
     interface HTMLCmMainAppElement extends Components.CmMainApp, HTMLStencilElement {
@@ -221,6 +234,24 @@ declare global {
     var HTMLCmMainAppElement: {
         prototype: HTMLCmMainAppElement;
         new (): HTMLCmMainAppElement;
+    };
+    interface HTMLCmSheetElementEventMap {
+        "openSheet": null;
+        "closeSheet": null;
+    }
+    interface HTMLCmSheetElement extends Components.CmSheet, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCmSheetElementEventMap>(type: K, listener: (this: HTMLCmSheetElement, ev: CmSheetCustomEvent<HTMLCmSheetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCmSheetElementEventMap>(type: K, listener: (this: HTMLCmSheetElement, ev: CmSheetCustomEvent<HTMLCmSheetElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCmSheetElement: {
+        prototype: HTMLCmSheetElement;
+        new (): HTMLCmSheetElement;
     };
     interface HTMLCmSpinnerElement extends Components.CmSpinner, HTMLStencilElement {
     }
@@ -270,6 +301,7 @@ declare global {
         "cm-dropdown": HTMLCmDropdownElement;
         "cm-input": HTMLCmInputElement;
         "cm-main-app": HTMLCmMainAppElement;
+        "cm-sheet": HTMLCmSheetElement;
         "cm-spinner": HTMLCmSpinnerElement;
         "cm-switch": HTMLCmSwitchElement;
         "cm-toast": HTMLCmToastElement;
@@ -333,8 +365,17 @@ declare namespace LocalJSX {
     }
     interface CmMainApp {
         "onCloseDialog"?: (event: CmMainAppCustomEvent<null>) => void;
+        "onCloseSheet"?: (event: CmMainAppCustomEvent<null>) => void;
         "onOpenDialog"?: (event: CmMainAppCustomEvent<null>) => void;
+        "onOpenSheet"?: (event: CmMainAppCustomEvent<null>) => void;
         "onToast"?: (event: CmMainAppCustomEvent<IToast>) => void;
+    }
+    interface CmSheet {
+        "isSheetVisible"?: boolean;
+        "onCloseSheet"?: (event: CmSheetCustomEvent<null>) => void;
+        "onOpenSheet"?: (event: CmSheetCustomEvent<null>) => void;
+        "position"?: 'top'|'bottom'|'right'|'left';
+        "sheetTitle"?: string;
     }
     interface CmSpinner {
     }
@@ -360,6 +401,7 @@ declare namespace LocalJSX {
         "cm-dropdown": CmDropdown;
         "cm-input": CmInput;
         "cm-main-app": CmMainApp;
+        "cm-sheet": CmSheet;
         "cm-spinner": CmSpinner;
         "cm-switch": CmSwitch;
         "cm-toast": CmToast;
@@ -376,6 +418,7 @@ declare module "@stencil/core" {
             "cm-dropdown": LocalJSX.CmDropdown & JSXBase.HTMLAttributes<HTMLCmDropdownElement>;
             "cm-input": LocalJSX.CmInput & JSXBase.HTMLAttributes<HTMLCmInputElement>;
             "cm-main-app": LocalJSX.CmMainApp & JSXBase.HTMLAttributes<HTMLCmMainAppElement>;
+            "cm-sheet": LocalJSX.CmSheet & JSXBase.HTMLAttributes<HTMLCmSheetElement>;
             "cm-spinner": LocalJSX.CmSpinner & JSXBase.HTMLAttributes<HTMLCmSpinnerElement>;
             "cm-switch": LocalJSX.CmSwitch & JSXBase.HTMLAttributes<HTMLCmSwitchElement>;
             "cm-toast": LocalJSX.CmToast & JSXBase.HTMLAttributes<HTMLCmToastElement>;
